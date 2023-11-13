@@ -1,9 +1,11 @@
 package christmas.domain.enums;
 
 public enum ErrorMessage {
-    ERROR_PRIFIX("[ERROR]"),
-    MIN_ORDER_COUNT_EXCEPTION("최소 주문 갯수를 만족하지 못했습니다.");
+    INVALID_ORDER_EXCEPTION("유효하지 않은 주문입니다. 다시 입력해 주세요."),
+    INVALID_DATE_EXCEPTION("유효하지 않은 날짜입니다. 다시 입력해 주세요."),
+    NUMBER_FORMAT_EXCEPTION("");
 
+    private final static String ERROR_PREFIX = "[ERROR] ";
     private final String message;
 
     ErrorMessage(String message){
@@ -11,6 +13,6 @@ public enum ErrorMessage {
     }
 
     public String getMessage(){
-        return ERROR_PRIFIX.message + message;
+        return ERROR_PREFIX + message;
     }
 }
