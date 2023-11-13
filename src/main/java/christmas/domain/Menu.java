@@ -8,10 +8,18 @@ public class Menu {
     private final MenuType menuType;
     private final int cost;
 
-    public Menu(String name, MenuType menuType, int cost){
+    public Menu(String name, MenuType menuType, int cost) {
         this.name = name;
         this.menuType = menuType;
         this.cost = cost;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public boolean isMenuType(MenuType anotherMenuType) {
+        return menuType.equals(anotherMenuType);
     }
 
     @Override
