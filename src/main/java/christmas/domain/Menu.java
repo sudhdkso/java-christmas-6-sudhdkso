@@ -13,9 +13,13 @@ public class Menu {
         this.menuType = menuType;
         this.cost = cost;
     }
-
+    
     public int getCost() {
         return cost;
+    }
+
+    public boolean hasSameName(String name) {
+        return this.name.equals(name);
     }
 
     public boolean isMenuType(MenuType anotherMenuType) {
