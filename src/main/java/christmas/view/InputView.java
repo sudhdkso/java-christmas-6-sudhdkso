@@ -13,7 +13,7 @@ public class InputView {
 
     }
 
-    public String readValidatetDate() {
+    public String readVisitDate() {
         return readInputData(ASK_VISIT_DATE);
     }
 
