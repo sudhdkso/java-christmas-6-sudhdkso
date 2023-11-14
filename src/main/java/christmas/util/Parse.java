@@ -37,14 +37,13 @@ public class Parse {
         List<String> parseMenu = parseOrderMenu(input);
 
         return parseMenu.stream()
-                .map(menu -> splitOrderMenu(input))
+                .map(menu -> splitOrderMenu(menu))
                 .collect(Collectors.toList());
     }
 
     private static OrderMenu splitOrderMenu(String input) {
         Pattern pattern = Pattern.compile("([^-]+)-(-?\\d+)");
         Matcher matcher = pattern.matcher(input);
-
         if (matcher.matches()) {
             Menu menu = Menus.getMenuByMenuName(matcher.group(1));
             int count = parseInt(matcher.group(2));
