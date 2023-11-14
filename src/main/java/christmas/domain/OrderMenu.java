@@ -10,12 +10,12 @@ public class OrderMenu {
         this.menu = menu;
         this.orderCount = orderCount;
     }
-    
+
     public static OrderMenu of(Menu menu, int count) {
         return new OrderMenu(menu, new OrderCount(count));
     }
 
-    private int getOrderCount() {
+    public int getOrderCount() {
         return orderCount.count();
     }
 
@@ -25,5 +25,9 @@ public class OrderMenu {
 
     public boolean isMenuType(MenuType anotherMenuType) {
         return menu.isMenuType(anotherMenuType);
+    }
+
+    public String render() {
+        return String.format("%s %d개", menu.getName(), getOrderCount());
     }
 }
