@@ -5,6 +5,7 @@ import static christmas.domain.enums.EventConstatns.MAX_ORDER_COUNT;
 import christmas.domain.enums.ErrorMessage;
 import christmas.domain.enums.MenuType;
 import christmas.util.ErrorException;
+import christmas.util.Parse;
 import java.util.List;
 
 public class OrderMenus {
@@ -16,7 +17,8 @@ public class OrderMenus {
         validate();
     }
 
-    public static OrderMenus from(List<OrderMenu> orderMenus) {
+    public static OrderMenus from(String separateOrder) {
+        List<OrderMenu> orderMenus = Parse.separateOrderMenu(separateOrder);
         return new OrderMenus(orderMenus);
     }
 
