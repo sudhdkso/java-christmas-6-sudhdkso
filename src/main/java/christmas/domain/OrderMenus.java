@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import static christmas.domain.enums.EventConstatns.BENEFIT_MIN_ORDER_AMOUNT;
+import static christmas.domain.enums.EventConstatns.GIVEAWAY_MIN_ORDER_AMOUNT;
 import static christmas.domain.enums.EventConstatns.MAX_ORDER_COUNT;
 
 import christmas.domain.enums.ErrorMessage;
@@ -72,6 +73,10 @@ public class OrderMenus {
 
     public boolean isEligibleForBenefit() {
         return getTotalOrderCost() >= BENEFIT_MIN_ORDER_AMOUNT;
+    }
+
+    public boolean isEligibleForGiveAway() {
+        return getTotalOrderCost() >= GIVEAWAY_MIN_ORDER_AMOUNT;
     }
 
     public String render() {

@@ -11,8 +11,8 @@ public class EventConstatns {
 
     public static final int MAX_ORDER_COUNT = 20;
 
-    public static final int BENEFIT_MIN_ORDER_AMOUNT = 120_000;
-
+    public static final int GIVEAWAY_MIN_ORDER_AMOUNT = 120_000;
+    public static final int BENEFIT_MIN_ORDER_AMOUNT = 10_000;
     public static final int INITIAL_EVENT_THRESHOLD = 1_000;
     public static final int ADDITIONAL_AMOUNT = 100;
 }
