@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Parse {
     private final static String DELIMETER = ",";
@@ -35,12 +36,9 @@ public class Parse {
         List<OrderMenu> orderMenus = new ArrayList<>();
         List<String> parseMenu = parseOrderMenu(input);
 
-        parseMenu.stream()
-                .forEach(menu -> {
-                    orderMenus.add(splitOrderMenu(menu));
-                });
-
-        return orderMenus;
+        return parseMenu.stream()
+                .map(menu -> splitOrderMenu(input))
+                .collect(Collectors.toList());
     }
 
     private static OrderMenu splitOrderMenu(String input) {

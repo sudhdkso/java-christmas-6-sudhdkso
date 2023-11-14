@@ -3,9 +3,9 @@ package christmas.domain;
 import christmas.domain.enums.ErrorMessage;
 import christmas.domain.enums.MenuInfo;
 import christmas.util.ErrorException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Menus {
     private static List<Menu> menus;
@@ -22,9 +22,8 @@ public class Menus {
     }
 
     private static List<Menu> setMenus() {
-        List<Menu> allMenu = new ArrayList<>();
-        Arrays.stream(MenuInfo.values())
-                .forEach(menu -> allMenu.add(new Menu(menu.getName(), menu.getMenuType(), menu.getCost())));
-        return allMenu;
+        return Arrays.stream(MenuInfo.values())
+                .map(menu -> new Menu(menu.getName(), menu.getMenuType(), menu.getCost()))
+                .collect(Collectors.toList());
     }
 }
