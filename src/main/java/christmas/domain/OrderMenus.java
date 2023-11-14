@@ -41,20 +41,19 @@ public class OrderMenus {
     }
 
     private int getBeverageCount() {
-        return orderMenus.stream()
+        return (int) orderMenus.stream()
                 .filter(orderMenu -> orderMenu.isMenuType(MenuType.BEVERAGE))
-                .mapToInt(OrderMenu::getOrderCount)
-                .sum();
+                .count();
     }
 
-    public int getDessertCount() {
+    public int getDessertOrderCount() {
         return orderMenus.stream()
                 .filter(orderMenu -> orderMenu.isMenuType(MenuType.DESSERT))
                 .mapToInt(OrderMenu::getOrderCount)
                 .sum();
     }
 
-    public int getMainCount() {
+    public int getMainOrderCount() {
         return orderMenus.stream()
                 .filter(orderMenu -> orderMenu.isMenuType(MenuType.MAIN))
                 .mapToInt(OrderMenu::getOrderCount)
