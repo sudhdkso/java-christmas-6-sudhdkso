@@ -13,7 +13,11 @@ public class Menu {
         this.menuType = menuType;
         this.cost = cost;
     }
-    
+
+    public String getName() {
+        return name;
+    }
+
     public int getCost() {
         return cost;
     }
