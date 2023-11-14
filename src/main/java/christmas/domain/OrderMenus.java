@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import static christmas.domain.enums.EventConstatns.BENEFIT_MIN_ORDER_AMOUNT;
 import static christmas.domain.enums.EventConstatns.MAX_ORDER_COUNT;
 
 import christmas.domain.enums.ErrorMessage;
@@ -40,21 +41,24 @@ public class OrderMenus {
     }
 
     private int getBeverageCount() {
-        return (int) orderMenus.stream()
+        return orderMenus.stream()
                 .filter(orderMenu -> orderMenu.isMenuType(MenuType.BEVERAGE))
-                .count();
+                .mapToInt(OrderMenu::getOrderCount)
+                .sum();
     }
 
     public int getDessertCount() {
-        return (int) orderMenus.stream()
+        return orderMenus.stream()
                 .filter(orderMenu -> orderMenu.isMenuType(MenuType.DESSERT))
-                .count();
+                .mapToInt(OrderMenu::getOrderCount)
+                .sum();
     }
 
     public int getMainCount() {
-        return (int) orderMenus.stream()
+        return orderMenus.stream()
                 .filter(orderMenu -> orderMenu.isMenuType(MenuType.MAIN))
-                .count();
+                .mapToInt(OrderMenu::getOrderCount)
+                .sum();
     }
 
     public int getTotalOrderCost() {
@@ -65,5 +69,17 @@ public class OrderMenus {
         return orderMenus.stream()
                 .mapToInt(OrderMenu::getTotalOrderMenuCost)
                 .sum();
+    }
+
+    public boolean isEligibleForBenefit() {
+        return getTotalOrderCost() >= BENEFIT_MIN_ORDER_AMOUNT;
+    }
+
+    public String render() {
+        StringBuilder sb = new StringBuilder();
+        orderMenus.stream()
+                .forEach(menu -> sb.append(menu.render())
+                        .append("\n"));
+        return sb.toString();
     }
 }
