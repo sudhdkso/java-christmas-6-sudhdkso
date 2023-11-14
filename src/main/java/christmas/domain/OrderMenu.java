@@ -10,7 +10,7 @@ public class OrderMenu {
         this.menu = menu;
         this.orderCount = orderCount;
     }
-
+    
     public static OrderMenu of(Menu menu, int count) {
         return new OrderMenu(menu, new OrderCount(count));
     }
