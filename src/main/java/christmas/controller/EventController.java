@@ -24,7 +24,7 @@ public class EventController {
     }
 
     private VisitDate getVisitDate() {
-        return VisitDate.create(Parse.parseInt(inputView.readValidatetDate()));
+        return VisitDate.create(Parse.parseInt(inputView.readVisitDate()));
     }
 
     private OrderMenus getOrderMenus() {
