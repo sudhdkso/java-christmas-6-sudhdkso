@@ -7,6 +7,7 @@ import christmas.domain.Menus;
 import christmas.domain.OrderMenus;
 import christmas.domain.SpecialDays;
 import christmas.domain.VisitDate;
+import christmas.domain.enums.EventBedge;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -26,8 +27,8 @@ public class EventController {
         OrderMenus orderMenus = getOrderMenus();
 
         outputView.printOrderMenu(orderMenus.render());
-
         outputView.printTotalAmount(orderMenus.getTotalOrderAmount());
+
         EventBenefit eventBenefit = new EventBenefit(visitDate, orderMenus);
 
         printEventBenefit(eventBenefit, orderMenus);
@@ -43,12 +44,18 @@ public class EventController {
                 OrderMenus.from(inputView.readOrderMenu()));
     }
 
+    private String getEventBedge(int amount) {
+        return EventBedge.getEventBedgeByAmount(Math.abs(amount));
+    }
+
     private void printEventBenefit(EventBenefit eventBenefit, OrderMenus orderMenus) {
         outputView.printGiveAwayMenu(eventBenefit.renderGiveAway());
         outputView.printTotalBenefit(eventBenefit.render());
         outputView.printTotalBenefitAmount(eventBenefit.getTotalEventBenefitAmount());
 
         outputView.printTotalPaymentAmount(orderMenus.getTotalOrderAmount() - eventBenefit.getTotalDeductedAmount());
+
+        outputView.printEventBedge(getEventBedge(eventBenefit.getTotalEventBenefitAmount()));
     }
 
 }
