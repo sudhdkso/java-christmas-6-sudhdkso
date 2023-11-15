@@ -6,23 +6,23 @@ import java.util.Objects;
 public class Menu {
     private final String name;
     private final MenuType menuType;
-    private final int cost;
+    private final int amount;
 
-    public Menu(String name, MenuType menuType, int cost) {
+    public Menu(String name, MenuType menuType, int amount) {
         this.name = name;
         this.menuType = menuType;
-        this.cost = cost;
+        this.amount = amount;
     }
 
     public String getName() {
         return name;
     }
 
-    public int getCost() {
-        return cost;
+    public int getAmount() {
+        return amount;
     }
 
-    public boolean hasSameName(String name) {
+    public boolean isSameName(String name) {
         return this.name.equals(name);
     }
 
@@ -44,6 +44,6 @@ public class Menu {
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, menuType, cost);
+        return Objects.hash(name, menuType, amount);
     }
 }

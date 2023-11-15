@@ -55,7 +55,7 @@ public class EventBenefit {
 
     private void caculateGiveAway(OrderMenus orderMenus) {
         if (orderMenus.isEligibleForGiveAway()) {
-            eventBenefit.put(BenefitType.GIVEAWY, giveAwayMenu.getCost());
+            eventBenefit.put(BenefitType.GIVEAWY, giveAwayMenu.getAmount());
         }
     }
 

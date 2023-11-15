@@ -73,7 +73,7 @@ public class OrderMenus {
 
     private int calculateTotalOrderAmount() {
         return orderMenus.stream()
-                .mapToInt(OrderMenu::getTotalOrderMenuCost)
+                .mapToInt(OrderMenu::getTotalOrderAmount)
                 .sum();
     }
 

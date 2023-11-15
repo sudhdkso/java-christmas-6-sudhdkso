@@ -19,8 +19,8 @@ public class OrderMenu {
         return orderCount.count();
     }
 
-    public int getTotalOrderMenuCost() {
-        return menu.getCost() * getOrderCount();
+    public int getTotalOrderAmount() {
+        return menu.getAmount() * getOrderCount();
     }
 
     public boolean isMenuType(MenuType anotherMenuType) {

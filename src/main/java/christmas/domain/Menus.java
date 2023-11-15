@@ -16,7 +16,7 @@ public class Menus {
 
     public static Menu getMenuByMenuName(String name) {
         return menus.stream()
-                .filter(menu -> menu.hasSameName(name))
+                .filter(menu -> menu.isSameName(name))
                 .findAny()
                 .orElseThrow(() -> new ErrorException(ErrorMessage.INVALID_ORDER_RETRY_EXCEPTION));
     }
