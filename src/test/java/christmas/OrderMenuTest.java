@@ -96,4 +96,17 @@ public class OrderMenuTest {
         assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("동일한 주문이 들어왔을 때 예외가 발생한다.")
+    void duplicate_order() {
+        //given
+        String menuInput = "시저샐러드-1,시저샐러드-1";
+        // when
+        Throwable thrown = catchThrowable(() -> OrderMenus.from(menuInput));
+
+        //then
+        assertThat(thrown)
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
