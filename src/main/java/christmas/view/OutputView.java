@@ -1,8 +1,14 @@
 package christmas.view;
 
+import static christmas.domain.enums.EventConstatns.EVENT_MONTH;
+
 import christmas.domain.enums.OutputMessage;
 
 public class OutputView {
+    public void printEventPreviewTitle(int visitDate) {
+        System.out.println(String.format("%d월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!", EVENT_MONTH, visitDate));
+        printNewLine();
+    }
 
     public void printOrderMenu(String orderMenus) {
         printTitle(OutputMessage.ORDER_MENU_TITLE);

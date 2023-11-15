@@ -26,12 +26,9 @@ public class EventController {
         VisitDate visitDate = getVisitDate();
         OrderMenus orderMenus = getOrderMenus();
 
-        outputView.printOrderMenu(orderMenus.render());
-        outputView.printTotalAmount(orderMenus.getTotalOrderAmount());
-
         EventBenefit eventBenefit = new EventBenefit(visitDate, orderMenus);
 
-        printEventBenefit(eventBenefit, orderMenus);
+        printEventBenefit(visitDate, eventBenefit, orderMenus);
     }
 
     private VisitDate getVisitDate() {
@@ -48,7 +45,13 @@ public class EventController {
         return EventBedge.getEventBedgeByAmount(Math.abs(amount));
     }
 
-    private void printEventBenefit(EventBenefit eventBenefit, OrderMenus orderMenus) {
+    private void printEventBenefit(VisitDate visitDate, EventBenefit eventBenefit, OrderMenus orderMenus) {
+
+        outputView.printEventPreviewTitle(visitDate.getVisitDate());
+
+        outputView.printOrderMenu(orderMenus.render());
+        outputView.printTotalAmount(orderMenus.getTotalOrderAmount());
+
         outputView.printGiveAwayMenu(eventBenefit.renderGiveAway());
         outputView.printTotalBenefit(eventBenefit.render());
         outputView.printTotalBenefitAmount(eventBenefit.getTotalEventBenefitAmount());

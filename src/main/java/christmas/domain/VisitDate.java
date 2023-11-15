@@ -37,7 +37,7 @@ public class VisitDate {
             throw new ErrorException(ErrorMessage.INVALID_DATE_RETRY_EXCEPTION);
         }
     }
-    
+
     public boolean isVisitDateWeekend() {
         int dayOfWeek = getDayOfWeek();
         if (EventDayOfWeeks.isWeekend(dayOfWeek)) {
@@ -70,5 +70,9 @@ public class VisitDate {
 
     public boolean isEventDay() {
         return visitDate <= EVENT_DAY_END_DATE;
+    }
+
+    public int getVisitDate() {
+        return visitDate;
     }
 }
