@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import christmas.domain.enums.MenuType;
+import java.util.Objects;
 
 public class OrderMenu {
     private final Menu menu;
@@ -29,5 +30,22 @@ public class OrderMenu {
 
     public String render() {
         return String.format("%s %d개", menu.getName(), getOrderCount());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        OrderMenu orderMenu = (OrderMenu) o;
+        return Objects.equals(menu, orderMenu.menu);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(menu, orderCount);
     }
 }

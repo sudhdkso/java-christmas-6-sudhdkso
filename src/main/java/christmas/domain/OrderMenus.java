@@ -27,6 +27,7 @@ public class OrderMenus {
     private void validate() {
         validateMenuCount();
         validateMaxOrderCount();
+        validateDuplicateMenu();
     }
 
     private void validateMaxOrderCount() {
@@ -39,6 +40,18 @@ public class OrderMenus {
         if (orderMenus.size() == getBeverageCount()) {
             throw new ErrorException(ErrorMessage.INVALID_ORDER_RETRY_EXCEPTION);
         }
+    }
+
+    private void validateDuplicateMenu() {
+        if (hasDuplicateMenu()) {
+            throw new ErrorException(ErrorMessage.INVALID_ORDER_RETRY_EXCEPTION);
+        }
+    }
+
+    private boolean hasDuplicateMenu() {
+        return (int) orderMenus.stream()
+                .distinct()
+                .count() != orderMenus.size();
     }
 
     private int getTotalOrderCount() {
