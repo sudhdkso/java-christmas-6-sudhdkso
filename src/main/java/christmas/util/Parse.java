@@ -21,8 +21,8 @@ public class Parse {
     }
 
     public static int parseVisitDate(String input) {
-        BudgetValidator.validate(input);
         Validator.validateVisitDateNumber(input);
+        BudgetValidator.validate(input);
         return Integer.parseInt(input);
     }
 
