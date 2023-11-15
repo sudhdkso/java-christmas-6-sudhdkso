@@ -4,6 +4,7 @@ import christmas.domain.Menu;
 import christmas.domain.Menus;
 import christmas.domain.OrderMenu;
 import christmas.domain.enums.ErrorMessage;
+import christmas.domain.enums.MenuType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,5 +54,17 @@ public class Parse {
             return OrderMenu.of(menu, count);
         }
         throw new ErrorException(ErrorMessage.INVALID_ORDER_RETRY_EXCEPTION);
+    }
+
+    public static Menu splitMenu(String input) {
+        Pattern pattern = Pattern.compile("([^-]+),([^-]+),([^-]+)");
+        Matcher matcher = pattern.matcher(input);
+        if (matcher.matches()) {
+            String name = matcher.group(1);
+            MenuType menuType = MenuType.getMenuTypeByName(matcher.group(2));
+            int cost = parseInt(matcher.group(3));
+            return new Menu(name, menuType, cost);
+        }
+        throw new ErrorException(ErrorMessage.INVALID_MENU_EXCEPTION);
     }
 }

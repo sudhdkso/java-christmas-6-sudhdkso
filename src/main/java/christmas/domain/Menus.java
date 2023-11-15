@@ -1,9 +1,9 @@
 package christmas.domain;
 
 import christmas.domain.enums.ErrorMessage;
-import christmas.domain.enums.MenuInfo;
 import christmas.util.ErrorException;
-import java.util.Arrays;
+import christmas.util.Parse;
+import christmas.util.ResourceReader;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,9 +21,14 @@ public class Menus {
                 .orElseThrow(() -> new ErrorException(ErrorMessage.INVALID_ORDER_RETRY_EXCEPTION));
     }
 
+    private static List<String> readMenusInfo() {
+        return ResourceReader.readResource("src/main/resources/menu-info.md");
+    }
+
     private static List<Menu> setMenus() {
-        return Arrays.stream(MenuInfo.values())
-                .map(menu -> new Menu(menu.getName(), menu.getMenuType(), menu.getCost()))
+        return readMenusInfo()
+                .stream()
+                .map(menu -> Parse.splitMenu(menu))
                 .collect(Collectors.toList());
     }
 }

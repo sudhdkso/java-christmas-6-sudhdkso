@@ -1,5 +1,7 @@
 package christmas.domain.enums;
 
+import java.util.Arrays;
+
 public enum MenuType {
     EMPTY("없음"),
     BEVERAGE("음료"),
@@ -11,5 +13,16 @@ public enum MenuType {
 
     MenuType(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public static MenuType getMenuTypeByName(String name) {
+        return Arrays.stream(values())
+                .filter(menuType -> menuType.getName().equals(name))
+                .findAny()
+                .orElse(MenuType.EMPTY);
     }
 }

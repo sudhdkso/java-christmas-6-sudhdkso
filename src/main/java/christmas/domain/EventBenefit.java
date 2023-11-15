@@ -3,11 +3,11 @@ package christmas.domain;
 import static christmas.domain.enums.EventConstatns.SPECIAL_DAY_DISCOUNT_AMOUNT;
 
 import christmas.domain.enums.BenefitType;
-import christmas.domain.enums.MenuInfo;
 import java.util.EnumMap;
 
 public class EventBenefit {
-    private static final MenuInfo giveAwayMenu = MenuInfo.CHAMPAGNE;
+    private static final String GIVE_AWAY_MENU_NAME = "샴페인";
+    private static final Menu giveAwayMenu = Menus.getMenuByMenuName(GIVE_AWAY_MENU_NAME);
     private static final int GIVE_AWAY_COUNT = 1;
     private static final String EMPTY = "없음\n";
     private static EnumMap<BenefitType, Integer> eventBenefit;
