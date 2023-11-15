@@ -31,13 +31,13 @@ public class OrderMenus {
 
     private void validateMaxOrderCount() {
         if (orderMenus.size() > MAX_ORDER_COUNT) {
-            throw new ErrorException(ErrorMessage.INVALID_ORDER_EXCEPTION);
+            throw new ErrorException(ErrorMessage.INVALID_ORDER_RETRY_EXCEPTION);
         }
     }
 
     private void validateMenuCount() {
         if (orderMenus.size() == getBeverageCount()) {
-            throw new ErrorException(ErrorMessage.INVALID_ORDER_EXCEPTION);
+            throw new ErrorException(ErrorMessage.INVALID_ORDER_RETRY_EXCEPTION);
         }
     }
 

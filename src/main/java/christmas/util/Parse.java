@@ -18,13 +18,16 @@ public class Parse {
     private Parse() {
     }
 
-    public static int parseInt(String input) {
+    public static int parseVisitDate(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new ErrorException(ErrorMessage.NUMBER_FORMAT_EXCEPTION);
+            throw new ErrorException(ErrorMessage.INVALID_DATE_RETRY_EXCEPTION);
         }
+    }
 
+    public static int parseInt(String input) {
+        return Integer.parseInt(input);
     }
 
     private static List<String> parseOrderMenu(String input) {
@@ -49,6 +52,6 @@ public class Parse {
             int count = parseInt(matcher.group(2));
             return OrderMenu.of(menu, count);
         }
-        throw new ErrorException(ErrorMessage.INVALID_ORDER_EXCEPTION);
+        throw new ErrorException(ErrorMessage.INVALID_ORDER_RETRY_EXCEPTION);
     }
 }

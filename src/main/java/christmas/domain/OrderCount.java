@@ -17,7 +17,7 @@ public record OrderCount(int count) {
 
     private void validateMinOrderCount(int count) {
         if (count < MIN_ORDER_COUNT) {
-            throw new ErrorException(ErrorMessage.INVALID_ORDER_EXCEPTION);
+            throw new ErrorException(ErrorMessage.INVALID_ORDER_RETRY_EXCEPTION);
         }
     }
 

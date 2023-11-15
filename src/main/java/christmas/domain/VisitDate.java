@@ -11,6 +11,7 @@ import static christmas.domain.enums.EventConstatns.INITIAL_EVENT_THRESHOLD;
 import christmas.domain.enums.ErrorMessage;
 import christmas.domain.enums.EventDayOfWeeks;
 import christmas.util.ErrorException;
+import christmas.util.Parse;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,8 +24,8 @@ public class VisitDate {
         this.visitDate = visitDate;
     }
 
-    public static VisitDate create(int visitDate) {
-        return new VisitDate(visitDate);
+    public static VisitDate create(String visitDate) {
+        return new VisitDate(Parse.parseVisitDate(visitDate));
     }
 
     private void validate(int visitDate) {
@@ -52,7 +53,7 @@ public class VisitDate {
 
     private void validateOutOfRangeVisitDate(int visitDate) {
         if (visitDate < EVENT_START_DATE || visitDate > EVENT_END_DATE) {
-            throw new ErrorException(ErrorMessage.INVALID_DATE_EXCEPTION);
+            throw new ErrorException(ErrorMessage.INVALID_DATE_RETRY_EXCEPTION);
         }
     }
 
@@ -61,6 +62,10 @@ public class VisitDate {
             return INITIAL_EVENT_THRESHOLD + (visitDate - 1) * ADDITIONAL_AMOUNT;
         }
         return 0;
+    }
+
+    public boolean isSpecialEventDay() {
+        return SpecialDays.contains(visitDate);
     }
 
     public boolean isEventDay() {

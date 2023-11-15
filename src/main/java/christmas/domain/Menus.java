@@ -18,7 +18,7 @@ public class Menus {
         return menus.stream()
                 .filter(menu -> menu.hasSameName(name))
                 .findAny()
-                .orElseThrow(() -> new ErrorException(ErrorMessage.INVALID_ORDER_EXCEPTION));
+                .orElseThrow(() -> new ErrorException(ErrorMessage.INVALID_ORDER_RETRY_EXCEPTION));
     }
 
     private static List<Menu> setMenus() {
