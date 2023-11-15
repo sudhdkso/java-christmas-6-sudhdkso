@@ -1,5 +1,6 @@
 package christmas.domain;
 
+import static christmas.domain.enums.EventConstatns.CHRISMAS_EVENT_AMOUNT;
 import static christmas.domain.enums.EventConstatns.SPECIAL_DAY_DISCOUNT_AMOUNT;
 
 import christmas.domain.enums.BenefitType;
@@ -40,17 +41,17 @@ public class EventBenefit {
     }
 
     private void caculateWeekDayDiscount(OrderMenus orderMenus) {
-        eventBenefit.put(BenefitType.WEEKDAY, orderMenus.getDessertOrderCount() * 2023);
+        eventBenefit.put(BenefitType.WEEKDAY, orderMenus.getDessertOrderCount() * CHRISMAS_EVENT_AMOUNT);
     }
 
+    private void caculateWeekendDiscount(OrderMenus orderMenus) {
+        eventBenefit.put(BenefitType.WEEKEND, orderMenus.getMainOrderCount() * CHRISMAS_EVENT_AMOUNT);
+    }
+    
     private void caculateSpecialDiscount(VisitDate visitDate) {
         if (visitDate.isSpecialEventDay()) {
             eventBenefit.put(BenefitType.SPECIAL, SPECIAL_DAY_DISCOUNT_AMOUNT);
         }
-    }
-
-    private void caculateWeekendDiscount(OrderMenus orderMenus) {
-        eventBenefit.put(BenefitType.WEEKEND, orderMenus.getMainOrderCount() * 2023);
     }
 
     private void caculateGiveAway(OrderMenus orderMenus) {
