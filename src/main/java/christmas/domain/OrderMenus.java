@@ -30,7 +30,7 @@ public class OrderMenus {
     }
 
     private void validateMaxOrderCount() {
-        if (orderMenus.size() > MAX_ORDER_COUNT) {
+        if (getTotalOrderCount() > MAX_ORDER_COUNT) {
             throw new ErrorException(ErrorMessage.INVALID_ORDER_RETRY_EXCEPTION);
         }
     }
@@ -39,6 +39,12 @@ public class OrderMenus {
         if (orderMenus.size() == getBeverageCount()) {
             throw new ErrorException(ErrorMessage.INVALID_ORDER_RETRY_EXCEPTION);
         }
+    }
+
+    private int getTotalOrderCount() {
+        return orderMenus.stream()
+                .mapToInt(OrderMenu::getOrderCount)
+                .sum();
     }
 
     private int getBeverageCount() {
