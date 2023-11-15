@@ -9,7 +9,7 @@ public class EventBenefit {
     private static final String GIVE_AWAY_MENU_NAME = "샴페인";
     private static final Menu giveAwayMenu = Menus.getMenuByMenuName(GIVE_AWAY_MENU_NAME);
     private static final int GIVE_AWAY_COUNT = 1;
-    private static final String EMPTY = "없음\n";
+    private static final String EMPTY = "없음";
     private static EnumMap<BenefitType, Integer> eventBenefit;
 
     public EventBenefit(VisitDate visitDate, OrderMenus orderMenus) {
