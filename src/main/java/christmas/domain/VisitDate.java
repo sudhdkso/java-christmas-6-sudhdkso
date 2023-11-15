@@ -32,6 +32,12 @@ public class VisitDate {
         validateOutOfRangeVisitDate(visitDate);
     }
 
+    private void validateOutOfRangeVisitDate(int visitDate) {
+        if (visitDate < EVENT_START_DATE || visitDate > EVENT_END_DATE) {
+            throw new ErrorException(ErrorMessage.INVALID_DATE_RETRY_EXCEPTION);
+        }
+    }
+    
     public boolean isVisitDateWeekend() {
         int dayOfWeek = getDayOfWeek();
         if (EventDayOfWeeks.isWeekend(dayOfWeek)) {
@@ -48,12 +54,6 @@ public class VisitDate {
             return date.getDay();
         } catch (ParseException e) {
             throw new ErrorException(ErrorMessage.NUMBER_FORMAT_EXCEPTION);
-        }
-    }
-
-    private void validateOutOfRangeVisitDate(int visitDate) {
-        if (visitDate < EVENT_START_DATE || visitDate > EVENT_END_DATE) {
-            throw new ErrorException(ErrorMessage.INVALID_DATE_RETRY_EXCEPTION);
         }
     }
 
