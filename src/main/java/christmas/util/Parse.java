@@ -13,22 +13,25 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Parse {
-    private final static String DELIMETER = ",";
-    private final static String SEPERATOR = "-";
+    private static final String DELIMETER = ",";
+    private static final String SEPERATOR = "-";
+    private static final Pattern VISIT_DATE_REGEX = Pattern.compile("^[0-9]*$");
 
     private Parse() {
     }
 
     public static int parseVisitDate(String input) {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new ErrorException(ErrorMessage.INVALID_DATE_RETRY_EXCEPTION);
-        }
+        BudgetValidator.validate(input);
+        Validator.validateVisitDateNumber(input);
+        return Integer.parseInt(input);
     }
 
     public static int parseInt(String input) {
-        return Integer.parseInt(input);
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new ErrorException(ErrorMessage.NUMBER_FORMAT_EXCEPTION);
+        }
     }
 
     private static List<String> parseOrderMenu(String input) {
