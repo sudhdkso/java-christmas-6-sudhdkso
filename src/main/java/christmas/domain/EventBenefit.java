@@ -1,22 +1,28 @@
 package christmas.domain;
 
+import static christmas.domain.enums.EventConstatns.SPECIAL_DAY_DISCOUNT_AMOUNT;
+
 import christmas.domain.enums.BenefitType;
 import christmas.domain.enums.MenuInfo;
 import java.util.EnumMap;
 
 public class EventBenefit {
+    private static final MenuInfo giveAwayMenu = MenuInfo.CHAMPAGNE;
+    private static final int GIVE_AWAY_COUNT = 1;
+    private static final String EMPTY = "없음\n";
     private static EnumMap<BenefitType, Integer> eventBenefit;
 
     public EventBenefit(VisitDate visitDate, OrderMenus orderMenus) {
         eventBenefit = new EnumMap<>(BenefitType.class);
         if (orderMenus.isEligibleForBenefit()) {
-            setEventBenefit(visitDate, orderMenus);
+            getEventBenefit(visitDate, orderMenus);
         }
     }
 
-    private void setEventBenefit(VisitDate visitDate, OrderMenus orderMenus) {
+    private void getEventBenefit(VisitDate visitDate, OrderMenus orderMenus) {
         caculateDdayDiscount(visitDate);
         caculateWeekDiscount(visitDate, orderMenus);
+        caculateSpecialDiscount(visitDate);
         caculateGiveAway(orderMenus);
     }
 
@@ -37,8 +43,10 @@ public class EventBenefit {
         eventBenefit.put(BenefitType.WEEKDAY, orderMenus.getDessertOrderCount() * 2023);
     }
 
-    private void caculateSpecialDiscount() {
-
+    private void caculateSpecialDiscount(VisitDate visitDate) {
+        if (visitDate.isSpecialEventDay()) {
+            eventBenefit.put(BenefitType.SPECIAL, SPECIAL_DAY_DISCOUNT_AMOUNT);
+        }
     }
 
     private void caculateWeekendDiscount(OrderMenus orderMenus) {
@@ -47,7 +55,7 @@ public class EventBenefit {
 
     private void caculateGiveAway(OrderMenus orderMenus) {
         if (orderMenus.isEligibleForGiveAway()) {
-            eventBenefit.put(BenefitType.GIVEAWY, MenuInfo.CHAMPAGNE.getCost());
+            eventBenefit.put(BenefitType.GIVEAWY, giveAwayMenu.getCost());
         }
     }
 
@@ -74,6 +82,10 @@ public class EventBenefit {
                 .sum();
     }
 
+    private boolean hasGiveWay() {
+        return eventBenefit.containsKey(BenefitType.GIVEAWY);
+    }
+
     public int getTotalEventBenefitAmount() {
         return caculateTotalEventBenefitAmount();
     }
@@ -82,13 +94,26 @@ public class EventBenefit {
         return caculateTotalDeductedAmount();
     }
 
+    private String renderBenefitEmpty() {
+        return new String(EMPTY);
+    }
+
+    public String renderGiveAway() {
+        StringBuilder sb = new StringBuilder();
+        if (hasGiveWay()) {
+            sb.append(String.format("%s %d개\n", giveAwayMenu.getName(), GIVE_AWAY_COUNT));
+            return sb.toString();
+        }
+
+        return renderBenefitEmpty();
+    }
+
     public String render() {
         StringBuilder sb = new StringBuilder();
         if (isBenefitEmpty()) {
-            sb.append("없음\n");
-            return sb.toString();
+            return renderBenefitEmpty();
         }
-        
+
         eventBenefit.keySet()
                 .forEach(benefit -> {
                     String name = benefit.getName();

@@ -61,22 +61,22 @@ public class OrderMenus {
                 .sum();
     }
 
-    public int getTotalOrderCost() {
-        return calculateTotalOrderCost();
+    public int getTotalOrderAmount() {
+        return calculateTotalOrderAmount();
     }
 
-    private int calculateTotalOrderCost() {
+    private int calculateTotalOrderAmount() {
         return orderMenus.stream()
                 .mapToInt(OrderMenu::getTotalOrderMenuCost)
                 .sum();
     }
 
     public boolean isEligibleForBenefit() {
-        return getTotalOrderCost() >= BENEFIT_MIN_ORDER_AMOUNT;
+        return getTotalOrderAmount() >= BENEFIT_MIN_ORDER_AMOUNT;
     }
 
     public boolean isEligibleForGiveAway() {
-        return getTotalOrderCost() >= GIVEAWAY_MIN_ORDER_AMOUNT;
+        return getTotalOrderAmount() >= GIVEAWAY_MIN_ORDER_AMOUNT;
     }
 
     public String render() {
