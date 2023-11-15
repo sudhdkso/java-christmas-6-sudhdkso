@@ -83,4 +83,17 @@ public class OrderMenuTest {
         assertThat(thrown)
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("최대 주문량을 초과하였을 때 오류가 발생한다")
+    void order_count_max_over() {
+        //given
+        String menuInput = "크리스마스파스타-21";
+        // when
+        Throwable thrown = catchThrowable(() -> OrderMenus.from(menuInput));
+
+        //then
+        assertThat(thrown)
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
